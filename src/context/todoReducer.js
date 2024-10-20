@@ -10,6 +10,11 @@ const todoReducer = (state, action) => {
                 ...state,
                 error: action.payload
             }
+        case "FILTER_TODOS":
+            return {
+                ...state,
+                todos: action.payload
+            }
         default:
             return state
     }
