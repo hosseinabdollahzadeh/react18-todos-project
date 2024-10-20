@@ -1,6 +1,7 @@
 import {useContext, useEffect, useState} from "react";
 import TodoContext from "../context/TodoContext";
 import FilterTodos from "../components/todos/Filter";
+import CreateTodo from "../components/todos/Create";
 
 const Todos = () => {
     const {todos, getTodos, error} = useContext(TodoContext)
@@ -17,6 +18,8 @@ const Todos = () => {
     return (
         <div className="container mt-5">
             <div className="row g-3">
+                <CreateTodo/>
+                <hr/>
                 <FilterTodos/>
                 {error && <div>{error}</div>}
                 {loading && <div className="col-md-12 text-center">

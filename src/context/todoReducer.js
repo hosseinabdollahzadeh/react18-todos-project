@@ -5,15 +5,20 @@ const todoReducer = (state, action) => {
                 ...state,
                 todos: action.payload
             }
-        case "SET_ERROR":
-            return {
-                ...state,
-                error: action.payload
-            }
         case "FILTER_TODOS":
             return {
                 ...state,
                 todos: action.payload
+            }
+        case "ADD_TODO":
+            return {
+                ...state,
+                todos: [action.payload, ...state.todos]
+            }
+        case "SET_ERROR":
+            return {
+                ...state,
+                error: action.payload
             }
         default:
             return state
