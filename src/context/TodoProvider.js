@@ -54,9 +54,31 @@ const TodoProvider = ({children}) => {
             dispatch({type: "ADD_TODO", payload: []})
         }
     }
+    const updateTodo = async (todo) => {
+        try {
+            const res = await axios.put(`https://jsonplaceholder.typicode.com/todos/${todo.id}`, {
+                title: todo.title,
+                completed: !todo.completed
+            })
+            dispatch({type: "UPDATE_TODO", payload: res.data})
+            dispatch({type: "SET_ERROR", payload: null})
+            Swal.fire({
+                title: "Task updated",
+                icon: "success",
+                showConfirmButton: false,
+                timerProgressBar: true,
+                timer: 3000,
+                toast: true,
+                position: 'top',
+            });
+        } catch (err) {
+            dispatch({type: "SET_ERROR", payload: err.message})
+            dispatch({type: "ADD_TODO", payload: []})
+        }
+    }
 
     return (
-        <TodoContext.Provider value={{...state, getTodos, filterTodos, addTodo}}>
+        <TodoContext.Provider value={{...state, getTodos, filterTodos, addTodo, updateTodo}}>
             {children}
         </TodoContext.Provider>
     )
